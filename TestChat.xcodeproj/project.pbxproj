@@ -9,7 +9,6 @@
 /* Begin PBXBuildFile section */
 		E7F451A91B944F68003564EC /* main.m in Sources */ = {isa = PBXBuildFile; fileRef = E7F451A81B944F68003564EC /* main.m */; };
 		E7F451AC1B944F68003564EC /* AppDelegate.m in Sources */ = {isa = PBXBuildFile; fileRef = E7F451AB1B944F68003564EC /* AppDelegate.m */; };
-		E7F451AF1B944F68003564EC /* TCLoginViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = E7F451AE1B944F68003564EC /* TCLoginViewController.m */; };
 		E7F451B21B944F68003564EC /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = E7F451B01B944F68003564EC /* Main.storyboard */; };
 		E7F451B41B944F68003564EC /* Images.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = E7F451B31B944F68003564EC /* Images.xcassets */; };
 		E7F451B71B944F68003564EC /* LaunchScreen.xib in Resources */ = {isa = PBXBuildFile; fileRef = E7F451B51B944F68003564EC /* LaunchScreen.xib */; };
@@ -30,6 +29,10 @@
 		E7F452041B9457C8003564EC /* SystemConfiguration.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = E7F452031B9457C8003564EC /* SystemConfiguration.framework */; };
 		E7F452061B9457DD003564EC /* libz.dylib in Frameworks */ = {isa = PBXBuildFile; fileRef = E7F452051B9457DD003564EC /* libz.dylib */; };
 		E7F452081B9457EB003564EC /* libsqlite3.dylib in Frameworks */ = {isa = PBXBuildFile; fileRef = E7F452071B9457EB003564EC /* libsqlite3.dylib */; };
+		E7F4520C1B945A5E003564EC /* TCRegistrationViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = E7F4520B1B945A5E003564EC /* TCRegistrationViewController.m */; };
+		E7F4520F1B945B0E003564EC /* TCBaseViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = E7F4520E1B945B0D003564EC /* TCBaseViewController.m */; };
+		E7F452121B945C8B003564EC /* TCMainViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = E7F452111B945C8B003564EC /* TCMainViewController.m */; };
+		E7F452161B945FF7003564EC /* TCLoginViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = E7F452151B945FF7003564EC /* TCLoginViewController.m */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -48,8 +51,6 @@
 		E7F451A81B944F68003564EC /* main.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = main.m; sourceTree = "<group>"; };
 		E7F451AA1B944F68003564EC /* AppDelegate.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = AppDelegate.h; sourceTree = "<group>"; };
 		E7F451AB1B944F68003564EC /* AppDelegate.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = AppDelegate.m; sourceTree = "<group>"; };
-		E7F451AD1B944F68003564EC /* TCLoginViewController.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = TCLoginViewController.h; sourceTree = "<group>"; };
-		E7F451AE1B944F68003564EC /* TCLoginViewController.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = TCLoginViewController.m; sourceTree = "<group>"; };
 		E7F451B11B944F68003564EC /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/Main.storyboard; sourceTree = "<group>"; };
 		E7F451B31B944F68003564EC /* Images.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Images.xcassets; sourceTree = "<group>"; };
 		E7F451B61B944F68003564EC /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.xib; name = Base; path = Base.lproj/LaunchScreen.xib; sourceTree = "<group>"; };
@@ -77,6 +78,14 @@
 		E7F452031B9457C8003564EC /* SystemConfiguration.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = SystemConfiguration.framework; path = System/Library/Frameworks/SystemConfiguration.framework; sourceTree = SDKROOT; };
 		E7F452051B9457DD003564EC /* libz.dylib */ = {isa = PBXFileReference; lastKnownFileType = "compiled.mach-o.dylib"; name = libz.dylib; path = usr/lib/libz.dylib; sourceTree = SDKROOT; };
 		E7F452071B9457EB003564EC /* libsqlite3.dylib */ = {isa = PBXFileReference; lastKnownFileType = "compiled.mach-o.dylib"; name = libsqlite3.dylib; path = usr/lib/libsqlite3.dylib; sourceTree = SDKROOT; };
+		E7F4520A1B945A5E003564EC /* TCRegistrationViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = TCRegistrationViewController.h; path = GUI/TCRegistrationViewController.h; sourceTree = "<group>"; };
+		E7F4520B1B945A5E003564EC /* TCRegistrationViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = TCRegistrationViewController.m; path = GUI/TCRegistrationViewController.m; sourceTree = "<group>"; };
+		E7F4520D1B945B0D003564EC /* TCBaseViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = TCBaseViewController.h; path = GUI/TCBaseViewController.h; sourceTree = "<group>"; };
+		E7F4520E1B945B0D003564EC /* TCBaseViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = TCBaseViewController.m; path = GUI/TCBaseViewController.m; sourceTree = "<group>"; };
+		E7F452101B945C8B003564EC /* TCMainViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = TCMainViewController.h; path = GUI/TCMainViewController.h; sourceTree = "<group>"; };
+		E7F452111B945C8B003564EC /* TCMainViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = TCMainViewController.m; path = GUI/TCMainViewController.m; sourceTree = "<group>"; };
+		E7F452141B945FF7003564EC /* TCLoginViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = TCLoginViewController.h; path = GUI/TCLoginViewController.h; sourceTree = "<group>"; };
+		E7F452151B945FF7003564EC /* TCLoginViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = TCLoginViewController.m; path = GUI/TCLoginViewController.m; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -131,6 +140,7 @@
 		E7F451A51B944F68003564EC /* TestChat */ = {
 			isa = PBXGroup;
 			children = (
+				E7F452131B945EB1003564EC /* Helpers */,
 				E7F451CF1B9452B2003564EC /* CORE */,
 				E7F451CE1B9452A6003564EC /* GUI */,
 				E7F451AA1B944F68003564EC /* AppDelegate.h */,
@@ -172,8 +182,14 @@
 		E7F451CE1B9452A6003564EC /* GUI */ = {
 			isa = PBXGroup;
 			children = (
-				E7F451AD1B944F68003564EC /* TCLoginViewController.h */,
-				E7F451AE1B944F68003564EC /* TCLoginViewController.m */,
+				E7F452141B945FF7003564EC /* TCLoginViewController.h */,
+				E7F452151B945FF7003564EC /* TCLoginViewController.m */,
+				E7F4520D1B945B0D003564EC /* TCBaseViewController.h */,
+				E7F4520E1B945B0D003564EC /* TCBaseViewController.m */,
+				E7F4520A1B945A5E003564EC /* TCRegistrationViewController.h */,
+				E7F4520B1B945A5E003564EC /* TCRegistrationViewController.m */,
+				E7F452101B945C8B003564EC /* TCMainViewController.h */,
+				E7F452111B945C8B003564EC /* TCMainViewController.m */,
 			);
 			name = GUI;
 			sourceTree = "<group>";
@@ -219,6 +235,13 @@
 				E7F451F51B945780003564EC /* AudioToolbox.framework */,
 			);
 			name = Frameworks;
+			sourceTree = "<group>";
+		};
+		E7F452131B945EB1003564EC /* Helpers */ = {
+			isa = PBXGroup;
+			children = (
+			);
+			name = Helpers;
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
@@ -321,12 +344,15 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				E7F451AF1B944F68003564EC /* TCLoginViewController.m in Sources */,
 				E7F451E71B945564003564EC /* PTParseManager.m in Sources */,
+				E7F452121B945C8B003564EC /* TCMainViewController.m in Sources */,
+				E7F4520C1B945A5E003564EC /* TCRegistrationViewController.m in Sources */,
 				E7F451E81B945564003564EC /* PTParseManager+Common.m in Sources */,
 				E7F451EA1B945564003564EC /* PTParseUser.m in Sources */,
 				E7F451E91B945564003564EC /* PTParseManager+Login.m in Sources */,
 				E7F451AC1B944F68003564EC /* AppDelegate.m in Sources */,
+				E7F452161B945FF7003564EC /* TCLoginViewController.m in Sources */,
+				E7F4520F1B945B0E003564EC /* TCBaseViewController.m in Sources */,
 				E7F451A91B944F68003564EC /* main.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;

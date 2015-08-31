@@ -18,5 +18,10 @@
     [super viewDidLoad];
 }
 
+- (IBAction)loginClick:(id)sender {
+}
+
+- (IBAction)registrationClick:(id)sender {
+}
 
 @end

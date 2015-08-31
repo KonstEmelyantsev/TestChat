@@ -15,9 +15,19 @@ NSString *const PTEmptyUsername = @"empty email";
 
 @implementation PTParseManager(Login)
 
-- (void)signUpUser:(PTUserModel *)userModel withSuccess:(void (^)(void))success errorBlock:(void (^)(NSError *))errorBlock {
+- (void)signUpUsername:(NSString *)username password:(NSString *)password email:(NSString *)email withSuccess:(PTVoidSuccess)success errorBlock:(PTFailureResponse)errorBlock {
     
-    /*PTParseUser *parseUser = [[PTParseUser alloc] initWithUserModel:userModel];
+    if(username.length > 5) {
+        if(username.length > 5) {
+            
+        } else {
+            
+        }
+    } else {
+        
+    }
+    
+    PTParseUser *parseUser = [[PTParseUser alloc] initWithUsername:username password:password email:email];
     
     [parseUser signUpInBackgroundWithBlock:^(BOOL succeeded, NSError *error) {
         if (!error) {
@@ -25,28 +35,10 @@ NSString *const PTEmptyUsername = @"empty email";
         } else {
             errorBlock(error);
         }
-    }];*/
+    }];
 }
 
-- (void)signUpSocialUser:(PTUserModel *)userModel withSuccess:(void (^)(void))success errorBlock:(void (^)(NSError *))errorBlock {
-    
-    /*PTParseUser *parseUser = [[PTParseUser alloc] initWithUserModel:userModel];
-    
-    [parseUser signUpInBackgroundWithBlock:^(BOOL succeeded, NSError *error) {
-        if (!error) {
-            success();
-        } else if (error.code == PTLoginErrorUserAlreadyExist) {
-            
-            //if user is already exist signIn
-            [self logInUsername:parseUser.username password:parseUser.password withSuccess:success errorBlock:errorBlock];
-            
-        } else {
-            errorBlock(error);
-        }
-    }];*/
-}
-
-- (void)logInUsername:(NSString *)username password:(NSString *)password withSuccess:(void (^)(void))success errorBlock:(void (^)(NSError *))errorBlock {
+- (void)logInUsername:(NSString *)username password:(NSString *)password withSuccess:(PTVoidSuccess)success errorBlock:(PTFailureResponse)errorBlock {
 
     /*NSError *parseError;
     NSMutableDictionary *details = [NSMutableDictionary new];

@@ -1,5 +1,5 @@
 //
-//  TCLoginViewController.h
+//  TCRegistrationViewController.h
 //  TestChat
 //
 //  Created by KonstEmelyantsev on 8/31/15.
@@ -7,9 +7,8 @@
 //
 
 #import <UIKit/UIKit.h>
+#import "TCBaseViewController.h"
 
-@interface TCLoginViewController : UIViewController
-
+@interface TCRegistrationViewController : TCBaseViewController
 
 @end
-

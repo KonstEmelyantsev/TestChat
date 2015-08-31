@@ -17,4 +17,6 @@ typedef void(^PTFailureResponse)(NSError *error);
 
 + (instancetype)sharedManager;
 
+- (void)setupParse;
+
 @end

@@ -10,5 +10,6 @@
 
 @interface PTParseUser : PFUser
 
+- (id)initWithUsername:(NSString *)username password:(NSString *)password email:(NSString *)email;
 
 @end

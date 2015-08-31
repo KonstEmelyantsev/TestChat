@@ -8,22 +8,17 @@
 
 #import "PTParseManager.h"
 
-@class PTUserModel;
-
 typedef NS_ENUM(NSUInteger, PTLoginError) {
     PTLoginErrorInvalidCredentials = 101,
     PTLoginErrorUserAlreadyExist = 202,
 };
-
 
 FOUNDATION_EXPORT NSString *const PTEmptyPassword;
 FOUNDATION_EXPORT NSString *const PTEmptyUsername;
 
 @interface PTParseManager(Login)
 
-- (void)signUpUser:(PTUserModel *)userModel withSuccess:(PTVoidSuccess)success errorBlock:(PTFailureResponse)errorBlock;
-
-- (void)signUpSocialUser:(PTUserModel *)userModel withSuccess:(PTVoidSuccess)success errorBlock:(PTFailureResponse)errorBlock;
+- (void)signUpUsername:(NSString *)username password:(NSString *)password email:(NSString *)email withSuccess:(PTVoidSuccess)success errorBlock:(PTFailureResponse)errorBlock;
 
 - (void)logInUsername:(NSString *)username password:(NSString *)password withSuccess:(PTVoidSuccess)success errorBlock:(PTFailureResponse)errorBlock;
 

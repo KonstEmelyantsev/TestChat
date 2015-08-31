@@ -11,29 +11,18 @@
 
 @implementation PTParseUser
 
-/*- (id)initWithUserModel:(PTUserModel *)userModel {
+- (id)initWithUsername:(NSString *)username password:(NSString *)password email:(NSString *)email {
     self = [PTParseUser new];
     if(self) {
         [self resetFields];
         
-        self.username       = userModel.username;
-        self.password       = userModel.password;
-        self.email          = (userModel.email.length > 0 &&
-                                ![userModel.email isEqual:[NSNull null]] &&
-                                ![userModel.email isEqualToString:@"(null)"]) ? userModel.email : @"";
+        self.username       = username;
+        self.password       = password;
+        self.email          = email;
         
-        self[@"phone"]      = (userModel.phone.length > 0) ? userModel.phone : @"";
-        self[@"firstname"]  = (userModel.firstname.length > 0) ? userModel.firstname : @"";
-        self[@"lastname"]   = (userModel.lastname.length > 0) ? userModel.lastname : @"";
-        self[@"lastname"]   = (userModel.lastname.length > 0) ? userModel.lastname : @"";
-        
-        self[@"fbprofile"]  = (userModel.profile_fb.length > 0) ? userModel.profile_fb : @"";
-        self[@"vkprofile"]  = (userModel.profile_vk.length > 0) ? userModel.profile_vk : @"";
-        self[@"gpprofile"]  = (userModel.profile_gp.length > 0) ? userModel.profile_gp : @"";
-
     }
     return self;
-}*/
+}
 
 - (void)resetFields {
     self.username                   = @"";
