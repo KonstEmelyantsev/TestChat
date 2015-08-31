@@ -11,12 +11,64 @@
 #define MAX_LENGTH 30
 
 @interface TCBaseViewController ()
-
+{
+    CGFloat keyboardHeight;
+}
 @property (weak, nonatomic) UIView *blockView;
+@property (weak, nonatomic) UITextField *activeField;
 
 @end
 
 @implementation TCBaseViewController
+
+- (void)viewDidLoad {
+    [super viewDidLoad];
+    [self registerForKeyboardNotifications];
+}
+
+- (void)keyboardDidShow:(NSNotification *)notification {
+    [self makeScroll:notification];
+}
+
+- (void)makeScroll:(NSNotification *)notification {
+    CGRect keyboardRect = [notification.userInfo[UIKeyboardFrameEndUserInfoKey] CGRectValue];
+    keyboardRect = [self.view convertRect:keyboardRect fromView:nil];
+    keyboardHeight = keyboardRect.size.height;
+    CGPoint point = [self.activeField.superview convertPoint:self.activeField.frame.origin toView:nil];
+    CGFloat tvY = point.y + self.activeField.frame.size.height;
+    CGFloat kbY = [[UIScreen mainScreen] bounds].size.height - keyboardHeight;
+    if(tvY < kbY) {
+        
+    } else {
+        CGPoint scrollPoint = CGPointMake(0, (tvY - kbY + 10 /*self.activeField.frame.size.height*/));
+        [self.scrollView setContentOffset:scrollPoint animated:YES];
+    }
+}
+
+- (void)keyboardWillHide:(NSNotification *)notification {
+    [self.scrollView setContentOffset:CGPointZero animated:YES];
+}
+
+- (void)textFieldDidBeginEditing:(UITextField *)sender {
+    self.activeField = sender;
+}
+
+- (void)textFieldDidEndEditing:(UITextField *)textField {
+    self.activeField = nil;
+}
+
+- (void)registerForKeyboardNotifications {
+    
+    [[NSNotificationCenter defaultCenter] addObserver:self
+                                             selector:@selector(keyboardDidShow:)
+                                                 name:UIKeyboardDidShowNotification
+                                               object:self.view.window];
+    
+    [[NSNotificationCenter defaultCenter] addObserver:self
+                                             selector:@selector(keyboardWillHide:)
+                                                 name:UIKeyboardWillHideNotification
+                                               object:self.view.window];
+}
 
 #pragma mark blocking ui function
 

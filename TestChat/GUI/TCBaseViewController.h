@@ -10,6 +10,8 @@
 
 @interface TCBaseViewController : UIViewController <UITextFieldDelegate>
 
+@property (nonatomic, weak) IBOutlet UIScrollView *scrollView;
+
 - (void)showBlockView;
 - (void)hideBlockView;
 
