@@ -91,6 +91,7 @@ CGFloat const PTMessageCellHeight = 45.f;
 - (void)updateChatForUser:(PTParseUser *)user {
     //[self showBlockView];
     self.curUser = user;
+    
     [[PTParseManager sharedManager] fetchMessageListForUser:user success:^(NSArray *array) {
         //[self hideBlockView];
         self.massagesList = (NSMutableArray *)array;
@@ -118,7 +119,6 @@ CGFloat const PTMessageCellHeight = 45.f;
         self.messageTF.text = @"";
         [[PTParseManager sharedManager] sendMassage:message toUser:self.curUser success:^{
             [self hideBlockView];
-            
         } errorBlock:^(NSError *error) {
             [self hideBlockView];
             

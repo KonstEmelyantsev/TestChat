@@ -33,7 +33,7 @@ NSString *const SortDiscriptorByCreated = @"createdAt";
     PFQuery *query = [PFQuery queryWithClassName:ParseClassNameMessage predicate:predicate];
     [query findObjectsInBackgroundWithBlock:^(NSArray *messageList, NSError *error) {
         if(!error) {
-            success([[[self sortArrayByDate:messageList] reverseObjectEnumerator] allObjects]);
+            success([self sortArrayByDate:messageList]);
         } else {
             errorBlock(error);
         }
