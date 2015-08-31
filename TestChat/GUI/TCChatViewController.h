@@ -7,9 +7,15 @@
 //
 
 #import <UIKit/UIKit.h>
+#import "TCBaseViewController.h"
 
-@interface TCChatViewController : UIViewController <UITableViewDelegate, UITableViewDataSource>
+@class PTParseUser;
+
+@interface TCChatViewController : TCBaseViewController <UITableViewDelegate, UITableViewDataSource>
 
 @property (nonatomic, strong) NSMutableArray *massagesList;
+@property (nonatomic, strong) PTParseUser *curUser;
+
+- (void)updateChatForUser:(PTParseUser *)user;
 
 @end

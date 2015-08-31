@@ -12,5 +12,4 @@
 
 @property (nonatomic, strong) NSMutableArray *usersList;
 
-
 @end

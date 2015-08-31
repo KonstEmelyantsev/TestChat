@@ -19,6 +19,8 @@ CGFloat const PTMessageCellHeight = 45.f;
     CGFloat _cellWidth;
 }
 
+@property (weak, nonatomic) IBOutlet UITableView *tableView;
+
 @end
 
 @implementation TCChatViewController
@@ -47,6 +49,19 @@ CGFloat const PTMessageCellHeight = 45.f;
         cell = [UITableViewCell new];
     }
     
+    PFObject *message = [self.massagesList objectAtIndex:indexPath.row];
+    
+    UILabel *label = (UILabel *)[cell viewWithTag:1];
+    UITextView *messageTV = (UITextView *)[cell viewWithTag:2];
+    [messageTV setText:message[@"text"]];
+    
+    NSString *creatorId = message[@"creatorId"];
+    if([creatorId isEqualToString:[PTParseUser currentUser].objectId]) {
+        [label setText:[PTParseUser currentUser].username];
+    } else if ([creatorId isEqualToString:self.curUser.objectId]) {
+        [label setText:self.curUser.objectId];
+    }
+    
     return  cell;
 }
 
@@ -63,6 +78,17 @@ CGFloat const PTMessageCellHeight = 45.f;
     CGFloat buffer = 3.0f;
     
     return floor(area/width) + buffer;
+}
+
+- (void)updateChatForUser:(PTParseUser *)user {
+    [self showBlockView];
+    [[PTParseManager sharedManager] fetchMessageListForUser:user success:^(NSArray *array) {
+        [self hideBlockView];
+        self.massagesList = (NSMutableArray *)array;
+        [self.tableView reloadData];
+    } errorBlock:^(NSError *error) {
+        [self hideBlockView];
+    }];
 }
 
 @end

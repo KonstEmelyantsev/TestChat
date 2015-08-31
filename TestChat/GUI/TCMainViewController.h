@@ -8,6 +8,15 @@
 
 #import <UIKit/UIKit.h>
 
+@class TCUsersViewController;
+@class TCChatViewController;
+@class PTParseUser;
+
 @interface TCMainViewController : UIViewController
+
+@property (nonatomic, strong) TCUsersViewController *usersVC;
+@property (nonatomic, strong) TCChatViewController *chatVC;
+
+- (void)updateChatForUser:(PTParseUser *)user;
 
 @end

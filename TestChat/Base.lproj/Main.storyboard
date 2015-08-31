@@ -365,7 +365,7 @@
                                                     <constraints>
                                                         <constraint firstAttribute="height" constant="21" id="OnP-hV-DRV"/>
                                                     </constraints>
-                                                    <fontDescription key="fontDescription" type="system" pointSize="17"/>
+                                                    <fontDescription key="fontDescription" type="system" pointSize="16"/>
                                                     <color key="textColor" cocoaTouchSystemColor="darkTextColor"/>
                                                     <nil key="highlightedColor"/>
                                                 </label>
@@ -403,6 +403,9 @@
                         </constraints>
                     </view>
                     <toolbarItems/>
+                    <connections>
+                        <outlet property="tableView" destination="WlH-Dh-e8O" id="y23-1h-lJ2"/>
+                    </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="A4z-b7-Zzs" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>

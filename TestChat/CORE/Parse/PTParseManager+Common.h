@@ -8,8 +8,11 @@
 
 #import "PTParseManager.h"
 
+@class PTParseUser;
+
 @interface PTParseManager(Common)
 
 - (void)fetchUsersListSuccess:(PTSuccessResponse)success errorBlock:(PTFailureResponse)errorBlock;
+- (void)fetchMessageListForUser:(PTParseUser *)user success:(PTSuccessResponse)success errorBlock:(PTFailureResponse)errorBlock;
 
 @end
