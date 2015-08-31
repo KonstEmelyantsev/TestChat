@@ -8,7 +8,7 @@
 
 #import "TCBaseViewController.h"
 
-#define MAX_LENGTH 30
+#define MAX_LENGTH 300
 
 @interface TCBaseViewController ()
 {

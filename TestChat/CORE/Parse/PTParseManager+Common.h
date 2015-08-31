@@ -14,5 +14,6 @@
 
 - (void)fetchUsersListSuccess:(PTSuccessResponse)success errorBlock:(PTFailureResponse)errorBlock;
 - (void)fetchMessageListForUser:(PTParseUser *)user success:(PTSuccessResponse)success errorBlock:(PTFailureResponse)errorBlock;
+- (void)sendMassage:(NSString *)text toUser:(PTParseUser *)user success:(PTVoidSuccess)success errorBlock:(PTFailureResponse)errorBlock;
 
 @end

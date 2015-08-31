@@ -20,7 +20,8 @@ CGFloat const PTMessageCellHeight = 45.f;
 }
 
 @property (weak, nonatomic) IBOutlet UITableView *tableView;
-@property (weak, nonatomic) IBOutlet NSTimer *timer;
+@property (weak, nonatomic) NSTimer *timer;
+@property (weak, nonatomic) IBOutlet UITextField *messageTF;
 
 @end
 
@@ -53,6 +54,8 @@ CGFloat const PTMessageCellHeight = 45.f;
     if (cell == nil) {
         cell = [UITableViewCell new];
     }
+    
+    cell.selectionStyle = UITableViewCellSelectionStyleNone;
     
     PFObject *message = [self.massagesList objectAtIndex:indexPath.row];
     
@@ -106,6 +109,21 @@ CGFloat const PTMessageCellHeight = 45.f;
 - (void)stopUpdating {
     [self.timer invalidate];
     self.timer = nil;
+}
+
+- (IBAction)sendMessageClick:(id)sender {
+    if(self.messageTF.text.length > 0) {
+        [self showBlockView];
+        [[PTParseManager sharedManager] sendMassage:self.messageTF.text toUser:self.curUser success:^{
+            [self hideBlockView];
+            
+        } errorBlock:^(NSError *error) {
+            [self hideBlockView];
+            
+        }];
+    } else {
+        
+    }
 }
 
 @end

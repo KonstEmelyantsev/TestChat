@@ -40,6 +40,21 @@ NSString *const SortDiscriptorByCreated = @"createdAt";
     }];
 }
 
+- (void)sendMassage:(NSString *)text toUser:(PTParseUser *)user success:(PTVoidSuccess)success errorBlock:(PTFailureResponse)errorBlock {
+    PFObject *message = [PFObject objectWithClassName:ParseClassNameMessage];
+    message[@"creatorId"] = [PTParseUser currentUser].objectId;
+    message[@"receiverId"] = user.objectId;
+    message[@"text"] = text;
+    
+    [message saveInBackgroundWithBlock:^(BOOL succeeded, NSError *error) {
+        if(!error) {
+            success();
+        } else {
+            errorBlock(error);
+        }
+    }];
+}
+
 - (NSMutableArray *)sortArrayByDate:(NSArray *)array {
     NSMutableArray *retArray = [NSMutableArray new];
     NSSortDescriptor *descriptor = [[NSSortDescriptor alloc] initWithKey:SortDiscriptorByCreated ascending: YES];
