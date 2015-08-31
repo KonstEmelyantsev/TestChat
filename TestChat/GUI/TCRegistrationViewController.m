@@ -29,6 +29,8 @@
     NSString *password = self.passwordTF.text;
     NSString *email = self.emailTF.text;
     
+    //Where is ofline field validation?
+    
     [self showBlockView];
     [[PTParseManager sharedManager] signUpUsername:username password:password email:email withSuccess:^{
         [self hideBlockView];

@@ -11,7 +11,7 @@
 
 CGFloat const PTMessageCellHeight = 45.f;
 
-#define MessageCellId       @"messageCell"
+//EternString  MessageCellId       @"messageCell"
 
 @interface TCChatViewController ()
 
@@ -47,7 +47,7 @@ CGFloat const PTMessageCellHeight = 45.f;
 
 - (UITableViewCell *)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath
 {
-    static NSString *cellContactId = MessageCellId;
+    static NSString *cellContactId = @"messageCell";
     
     UITableViewCell *cell = (UITableViewCell*)[tableView dequeueReusableCellWithIdentifier:cellContactId];
     

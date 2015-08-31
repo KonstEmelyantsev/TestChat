@@ -33,6 +33,7 @@
 
 - (IBAction)backClick:(id)sender {
     [self.chatVC stopUpdating];
+    [PTParseUser logOut];
     [self.navigationController popToRootViewControllerAnimated:YES];
 }
 
