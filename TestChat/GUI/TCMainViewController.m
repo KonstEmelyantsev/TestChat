@@ -32,6 +32,7 @@
 }
 
 - (IBAction)backClick:(id)sender {
+    [self.chatVC stopUpdating];
     [self.navigationController popToRootViewControllerAnimated:YES];
 }
 

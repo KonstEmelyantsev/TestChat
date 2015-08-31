@@ -17,5 +17,6 @@
 @property (nonatomic, strong) PTParseUser *curUser;
 
 - (void)updateChatForUser:(PTParseUser *)user;
+- (void)stopUpdating;
 
 @end

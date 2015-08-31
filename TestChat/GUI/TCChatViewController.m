@@ -20,6 +20,7 @@ CGFloat const PTMessageCellHeight = 45.f;
 }
 
 @property (weak, nonatomic) IBOutlet UITableView *tableView;
+@property (weak, nonatomic) IBOutlet NSTimer *timer;
 
 @end
 
@@ -29,6 +30,10 @@ CGFloat const PTMessageCellHeight = 45.f;
     [super viewDidLoad];
     
     _cellWidth = self.view.frame.size.width;
+    
+    self.timer = [NSTimer scheduledTimerWithTimeInterval:2.0 target:self selector:@selector(refreshData) userInfo:nil repeats:YES];
+    [[NSRunLoop mainRunLoop] addTimer:self.timer forMode:NSRunLoopCommonModes];
+
 }
 
 - (NSInteger)tableView:(UITableView *)tableView numberOfRowsInSection:(NSInteger)section {
@@ -81,14 +86,26 @@ CGFloat const PTMessageCellHeight = 45.f;
 }
 
 - (void)updateChatForUser:(PTParseUser *)user {
-    [self showBlockView];
+    //[self showBlockView];
+    self.curUser = user;
     [[PTParseManager sharedManager] fetchMessageListForUser:user success:^(NSArray *array) {
-        [self hideBlockView];
+        //[self hideBlockView];
         self.massagesList = (NSMutableArray *)array;
         [self.tableView reloadData];
     } errorBlock:^(NSError *error) {
-        [self hideBlockView];
+        //[self hideBlockView];
     }];
+}
+
+- (void)refreshData {
+    if(self.curUser) {
+        [self updateChatForUser:self.curUser];
+    }
+}
+
+- (void)stopUpdating {
+    [self.timer invalidate];
+    self.timer = nil;
 }
 
 @end
