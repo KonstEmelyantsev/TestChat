@@ -10,4 +10,8 @@
 
 @implementation TCMainViewController
 
+- (IBAction)backClick:(id)sender {
+    [self.navigationController popToRootViewControllerAnimated:YES];
+}
+
 @end

@@ -26,11 +26,14 @@
 - (IBAction)loginClick:(id)sender {
     NSString *username = self.usernameTF.text;
     NSString *password = self.passwordTF.text;
+    
+    [self showBlockView];
     [[PTParseManager sharedManager] logInUsername:username password:password withSuccess:^{
+        [self hideBlockView];
         TCMainViewController *vc = [self.storyboard instantiateViewControllerWithIdentifier:@"TCMainViewController"];
         [self.navigationController pushViewController:vc animated:YES];
     } errorBlock:^(NSError *error) {
-        
+        [self hideBlockView];
     }];
 }
 

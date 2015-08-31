@@ -29,11 +29,13 @@
     NSString *password = self.passwordTF.text;
     NSString *email = self.emailTF.text;
     
+    [self showBlockView];
     [[PTParseManager sharedManager] signUpUsername:username password:password email:email withSuccess:^{
+        [self hideBlockView];
         TCMainViewController *vc = [self.storyboard instantiateViewControllerWithIdentifier:@"TCMainViewController"];
         [self.navigationController pushViewController:vc animated:YES];
     } errorBlock:^(NSError *error) {
-
+        [self hideBlockView];
     }];
 }
 

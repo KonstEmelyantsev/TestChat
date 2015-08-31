@@ -10,4 +10,7 @@
 
 @interface TCBaseViewController : UIViewController <UITextFieldDelegate>
 
+- (void)showBlockView;
+- (void)hideBlockView;
+
 @end
