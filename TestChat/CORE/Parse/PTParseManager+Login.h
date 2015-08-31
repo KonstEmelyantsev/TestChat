@@ -8,9 +8,10 @@
 
 #import "PTParseManager.h"
 
-typedef NS_ENUM(NSUInteger, PTLoginError) {
-    PTLoginErrorInvalidCredentials = 101,
-    PTLoginErrorUserAlreadyExist = 202,
+typedef NS_ENUM(NSUInteger, ParseLoginError) {
+    ParseLoginErrorInvalidCredentials = 101,
+    ParseLoginErrorUserAlreadyExist = 202,
+    ParseLoginErrorUserData = 500,
 };
 
 FOUNDATION_EXPORT NSString *const PTEmptyPassword;

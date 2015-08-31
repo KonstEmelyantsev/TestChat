@@ -8,43 +8,48 @@
 
 #import "PTParseManager+Login.h"
 #import "PTParseUser.h"
+#import "NSString+Validator.h"
 
-NSString *const PTEmptyPassword = @"empty password";
-NSString *const PTEmptyUsername = @"empty email";
+NSString *const ParseShortPassword = @"Password length is less than 5 characters";
+NSString *const ParseShortUsername = @"Username length is less than 5 characters";
+NSString *const ParseInvalidEmail = @"Email is invalid";
 
+NSString *const ParseError = @"ParseError";
 
 @implementation PTParseManager(Login)
 
 - (void)signUpUsername:(NSString *)username password:(NSString *)password email:(NSString *)email withSuccess:(PTVoidSuccess)success errorBlock:(PTFailureResponse)errorBlock {
     
-    if(username.length > 5) {
-        if(username.length > 5) {
-            
+    if(username.length >= 5) {
+        if(password.length >= 5) {
+            if(email.isEmailValid) {
+                PTParseUser *parseUser = [[PTParseUser alloc] initWithUsername:username password:password email:email];
+                
+                [parseUser signUpInBackgroundWithBlock:^(BOOL succeeded, NSError *error) {
+                    if (!error) {
+                        success();
+                    } else {
+                        errorBlock(error);
+                    }
+                }];
+            } else {
+                errorBlock([self parseErrorWithValue:ParseInvalidEmail]);
+                return;
+            }
         } else {
-            
+            errorBlock([self parseErrorWithValue:ParseShortPassword]);
+            return;
         }
     } else {
-        
+        errorBlock([self parseErrorWithValue:ParseShortUsername]);
+        return;
     }
-    
-    PTParseUser *parseUser = [[PTParseUser alloc] initWithUsername:username password:password email:email];
-    
-    [parseUser signUpInBackgroundWithBlock:^(BOOL succeeded, NSError *error) {
-        if (!error) {
-            success();
-        } else {
-            errorBlock(error);
-        }
-    }];
 }
 
 - (void)logInUsername:(NSString *)username password:(NSString *)password withSuccess:(PTVoidSuccess)success errorBlock:(PTFailureResponse)errorBlock {
 
-    /*NSError *parseError;
-    NSMutableDictionary *details = [NSMutableDictionary new];
-
-    if(username.length > 0) {
-        if(password.length > 0) {
+    if(username.length >= 5) {
+        if(password.length >= 5) {
             [PTParseUser logInWithUsernameInBackground:username password:password
                                                  block:^(PFUser *user, NSError *error) {
                                                      if(user) {
@@ -54,17 +59,22 @@ NSString *const PTEmptyUsername = @"empty email";
                                                      }
                                                  }];
         } else {
-            [details setValue:PTEmptyPassword forKey:NSLocalizedDescriptionKey];
-            parseError = [NSError errorWithDomain:@"parseError" code:500 userInfo:details];
-            errorBlock(parseError);
+            errorBlock([self parseErrorWithValue:ParseShortPassword]);
             return;
         }
     } else {
-        [details setValue:PTEmptyUsername forKey:NSLocalizedDescriptionKey];
-        parseError = [NSError errorWithDomain:@"parseError" code:500 userInfo:details];
-        errorBlock(parseError);
+        errorBlock([self parseErrorWithValue:ParseInvalidEmail]);
         return;
-    }*/
+    }
+}
+
+- (NSError *)parseErrorWithValue:(NSString *)value {
+    NSMutableDictionary *details = [NSMutableDictionary new];
+    
+    [details setValue:value forKey:NSLocalizedDescriptionKey];
+    NSError *parseError = [NSError errorWithDomain:ParseError code:ParseLoginErrorUserData userInfo:details];
+
+    return parseError;
 }
 
 @end

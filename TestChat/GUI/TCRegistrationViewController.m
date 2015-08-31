@@ -8,6 +8,15 @@
 
 #import "TCRegistrationViewController.h"
 #import "PTParseHeader.h"
+#import "TCMainViewController.h"
+
+@interface TCRegistrationViewController ()
+
+@property (weak, nonatomic) IBOutlet UITextField *usernameTF;
+@property (weak, nonatomic) IBOutlet UITextField *passwordTF;
+@property (weak, nonatomic) IBOutlet UITextField *emailTF;
+
+@end
 
 @implementation TCRegistrationViewController
 
@@ -16,7 +25,16 @@
 }
 
 - (IBAction)registrationClick:(id)sender {
-    //[[PTParseManager sharedManager] si]
+    NSString *username = self.usernameTF.text;
+    NSString *password = self.passwordTF.text;
+    NSString *email = self.emailTF.text;
+    
+    [[PTParseManager sharedManager] signUpUsername:username password:password email:email withSuccess:^{
+        TCMainViewController *vc = [self.storyboard instantiateViewControllerWithIdentifier:@"TCMainViewController"];
+        [self.navigationController pushViewController:vc animated:YES];
+    } errorBlock:^(NSError *error) {
+
+    }];
 }
 
 @end

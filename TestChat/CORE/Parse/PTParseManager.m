@@ -7,6 +7,7 @@
 //
 
 #import "PTParseManager.h"
+#import "PTParseUser.h"
 
 NSString *const ParseApplicationId = @"4vOae52Y8WKIqstWtDFWwB2i9SE22pUp1KSRKb0o";
 NSString *const ParseClientKey = @"cPsqnNXtN5GtIJrqNCEmbfR2GyS1VqQIZrnarklJ";
@@ -23,8 +24,10 @@ NSString *const ParseClientKey = @"cPsqnNXtN5GtIJrqNCEmbfR2GyS1VqQIZrnarklJ";
 }
 
 - (void)setupParse {
+    [PTParseUser registerSubclass];
     [Parse setApplicationId:ParseApplicationId
                   clientKey:ParseClientKey];
 }
+
 
 @end

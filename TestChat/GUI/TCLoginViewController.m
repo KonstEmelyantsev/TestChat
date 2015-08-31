@@ -7,8 +7,13 @@
 //
 
 #import "TCLoginViewController.h"
+#import "PTParseHeader.h"
+#import "TCMainViewController.h"
 
 @interface TCLoginViewController ()
+
+@property (weak, nonatomic) IBOutlet UITextField *usernameTF;
+@property (weak, nonatomic) IBOutlet UITextField *passwordTF;
 
 @end
 
@@ -19,9 +24,14 @@
 }
 
 - (IBAction)loginClick:(id)sender {
-}
-
-- (IBAction)registrationClick:(id)sender {
+    NSString *username = self.usernameTF.text;
+    NSString *password = self.passwordTF.text;
+    [[PTParseManager sharedManager] logInUsername:username password:password withSuccess:^{
+        TCMainViewController *vc = [self.storyboard instantiateViewControllerWithIdentifier:@"TCMainViewController"];
+        [self.navigationController pushViewController:vc animated:YES];
+    } errorBlock:^(NSError *error) {
+        
+    }];
 }
 
 @end
