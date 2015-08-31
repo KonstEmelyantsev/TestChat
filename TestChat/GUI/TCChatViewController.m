@@ -67,7 +67,7 @@ CGFloat const PTMessageCellHeight = 45.f;
     if([creatorId isEqualToString:[PTParseUser currentUser].objectId]) {
         [label setText:[PTParseUser currentUser].username];
     } else if ([creatorId isEqualToString:self.curUser.objectId]) {
-        [label setText:self.curUser.objectId];
+        [label setText:self.curUser.username];
     }
     
     return  cell;
@@ -114,7 +114,9 @@ CGFloat const PTMessageCellHeight = 45.f;
 - (IBAction)sendMessageClick:(id)sender {
     if(self.messageTF.text.length > 0) {
         [self showBlockView];
-        [[PTParseManager sharedManager] sendMassage:self.messageTF.text toUser:self.curUser success:^{
+        NSString *message = self.messageTF.text;
+        self.messageTF.text = @"";
+        [[PTParseManager sharedManager] sendMassage:message toUser:self.curUser success:^{
             [self hideBlockView];
             
         } errorBlock:^(NSError *error) {
