@@ -10,8 +10,6 @@
 
 @interface PTParseManager(Common)
 
-- (void)fetchAvatarListSuccess:(PTSuccessResponse)success errorBlock:(PTFailureResponse)errorBlock;
-- (void)fetchInvitesListSuccess:(PTSuccessResponse)success errorBlock:(PTFailureResponse)errorBlock;
-- (void)fetchGamesListSuccess:(PTSuccessResponse)success errorBlock:(PTFailureResponse)errorBlock;
+- (void)fetchUsersListSuccess:(PTSuccessResponse)success errorBlock:(PTFailureResponse)errorBlock;
 
 @end

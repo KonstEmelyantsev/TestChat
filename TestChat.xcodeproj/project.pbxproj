@@ -34,6 +34,8 @@
 		E7F452121B945C8B003564EC /* TCMainViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = E7F452111B945C8B003564EC /* TCMainViewController.m */; };
 		E7F452161B945FF7003564EC /* TCLoginViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = E7F452151B945FF7003564EC /* TCLoginViewController.m */; };
 		E7F452191B946031003564EC /* NSString+Validator.m in Sources */ = {isa = PBXBuildFile; fileRef = E7F452181B946031003564EC /* NSString+Validator.m */; };
+		E7F4521E1B946C06003564EC /* TCUsersViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = E7F4521D1B946C06003564EC /* TCUsersViewController.m */; };
+		E7F452211B946C16003564EC /* TCChatViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = E7F452201B946C16003564EC /* TCChatViewController.m */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -89,6 +91,10 @@
 		E7F452151B945FF7003564EC /* TCLoginViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = TCLoginViewController.m; path = GUI/TCLoginViewController.m; sourceTree = "<group>"; };
 		E7F452171B946031003564EC /* NSString+Validator.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = "NSString+Validator.h"; path = "Helpers/NSString+Validator.h"; sourceTree = "<group>"; };
 		E7F452181B946031003564EC /* NSString+Validator.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = "NSString+Validator.m"; path = "Helpers/NSString+Validator.m"; sourceTree = "<group>"; };
+		E7F4521C1B946C06003564EC /* TCUsersViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = TCUsersViewController.h; path = GUI/TCUsersViewController.h; sourceTree = "<group>"; };
+		E7F4521D1B946C06003564EC /* TCUsersViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = TCUsersViewController.m; path = GUI/TCUsersViewController.m; sourceTree = "<group>"; };
+		E7F4521F1B946C16003564EC /* TCChatViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = TCChatViewController.h; path = GUI/TCChatViewController.h; sourceTree = "<group>"; };
+		E7F452201B946C16003564EC /* TCChatViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = TCChatViewController.m; path = GUI/TCChatViewController.m; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -185,14 +191,10 @@
 		E7F451CE1B9452A6003564EC /* GUI */ = {
 			isa = PBXGroup;
 			children = (
+				E7F4521B1B946BEF003564EC /* Main */,
+				E7F4521A1B946BDF003564EC /* Auth */,
 				E7F4520D1B945B0D003564EC /* TCBaseViewController.h */,
 				E7F4520E1B945B0D003564EC /* TCBaseViewController.m */,
-				E7F452141B945FF7003564EC /* TCLoginViewController.h */,
-				E7F452151B945FF7003564EC /* TCLoginViewController.m */,
-				E7F4520A1B945A5E003564EC /* TCRegistrationViewController.h */,
-				E7F4520B1B945A5E003564EC /* TCRegistrationViewController.m */,
-				E7F452101B945C8B003564EC /* TCMainViewController.h */,
-				E7F452111B945C8B003564EC /* TCMainViewController.m */,
 			);
 			name = GUI;
 			sourceTree = "<group>";
@@ -247,6 +249,30 @@
 				E7F452181B946031003564EC /* NSString+Validator.m */,
 			);
 			name = Helpers;
+			sourceTree = "<group>";
+		};
+		E7F4521A1B946BDF003564EC /* Auth */ = {
+			isa = PBXGroup;
+			children = (
+				E7F452141B945FF7003564EC /* TCLoginViewController.h */,
+				E7F452151B945FF7003564EC /* TCLoginViewController.m */,
+				E7F4520A1B945A5E003564EC /* TCRegistrationViewController.h */,
+				E7F4520B1B945A5E003564EC /* TCRegistrationViewController.m */,
+			);
+			name = Auth;
+			sourceTree = "<group>";
+		};
+		E7F4521B1B946BEF003564EC /* Main */ = {
+			isa = PBXGroup;
+			children = (
+				E7F452101B945C8B003564EC /* TCMainViewController.h */,
+				E7F452111B945C8B003564EC /* TCMainViewController.m */,
+				E7F4521C1B946C06003564EC /* TCUsersViewController.h */,
+				E7F4521D1B946C06003564EC /* TCUsersViewController.m */,
+				E7F4521F1B946C16003564EC /* TCChatViewController.h */,
+				E7F452201B946C16003564EC /* TCChatViewController.m */,
+			);
+			name = Main;
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
@@ -358,7 +384,9 @@
 				E7F451AC1B944F68003564EC /* AppDelegate.m in Sources */,
 				E7F452161B945FF7003564EC /* TCLoginViewController.m in Sources */,
 				E7F452191B946031003564EC /* NSString+Validator.m in Sources */,
+				E7F452211B946C16003564EC /* TCChatViewController.m in Sources */,
 				E7F4520F1B945B0E003564EC /* TCBaseViewController.m in Sources */,
+				E7F4521E1B946C06003564EC /* TCUsersViewController.m in Sources */,
 				E7F451A91B944F68003564EC /* main.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;

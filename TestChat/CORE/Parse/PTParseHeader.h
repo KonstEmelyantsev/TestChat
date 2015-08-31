@@ -11,5 +11,6 @@
 
 #import "PTParseManager+Login.h"
 #import "PTParseManager+Common.h"
+#import "PTParseUser.h"
 
 #endif
