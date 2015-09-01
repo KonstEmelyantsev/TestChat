@@ -11,7 +11,8 @@
 
 CGFloat const PTMessageCellHeight = 45.f;
 
-//EternString  MessageCellId       @"messageCell"
+static NSString *messageCellOutId   = @"messageCellOut";
+static NSString *messageCellInId    = @"messageCellIn";
 
 @interface TCChatViewController ()
 
@@ -47,9 +48,19 @@ CGFloat const PTMessageCellHeight = 45.f;
 
 - (UITableViewCell *)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath
 {
-    static NSString *cellContactId = @"messageCell";
+    PFObject *message = [self.massagesList objectAtIndex:indexPath.row];
     
-    UITableViewCell *cell = (UITableViewCell*)[tableView dequeueReusableCellWithIdentifier:cellContactId];
+    NSString *cellId, *username;
+    NSString *creatorId = message[@"creatorId"];
+    if([creatorId isEqualToString:[PTParseUser currentUser].objectId]) {
+        cellId = messageCellInId;
+        username = [PTParseUser currentUser].username;
+    } else if ([creatorId isEqualToString:self.curUser.objectId]) {
+        cellId = messageCellOutId;
+        username = self.curUser.username;
+    }
+    
+    UITableViewCell *cell = (UITableViewCell*)[tableView dequeueReusableCellWithIdentifier:cellId];
     
     if (cell == nil) {
         cell = [UITableViewCell new];
@@ -57,18 +68,14 @@ CGFloat const PTMessageCellHeight = 45.f;
     
     cell.selectionStyle = UITableViewCellSelectionStyleNone;
     
-    PFObject *message = [self.massagesList objectAtIndex:indexPath.row];
-    
     UILabel *label = (UILabel *)[cell viewWithTag:1];
+    [label setText:username];
+
     UITextView *messageTV = (UITextView *)[cell viewWithTag:2];
     [messageTV setText:message[@"text"]];
     
-    NSString *creatorId = message[@"creatorId"];
-    if([creatorId isEqualToString:[PTParseUser currentUser].objectId]) {
-        [label setText:[PTParseUser currentUser].username];
-    } else if ([creatorId isEqualToString:self.curUser.objectId]) {
-        [label setText:self.curUser.username];
-    }
+    [messageTV.layer setCornerRadius:5.f];
+    [messageTV setClipsToBounds:YES];
     
     return  cell;
 }
@@ -89,15 +96,14 @@ CGFloat const PTMessageCellHeight = 45.f;
 }
 
 - (void)updateChatForUser:(PTParseUser *)user {
-    //[self showBlockView];
     self.curUser = user;
     
     [[PTParseManager sharedManager] fetchMessageListForUser:user success:^(NSArray *array) {
-        //[self hideBlockView];
-        self.massagesList = (NSMutableArray *)array;
-        [self.tableView reloadData];
+        if(array.count != self.massagesList.count) {
+            [self reloadDataByArray:array];
+        }
     } errorBlock:^(NSError *error) {
-        //[self hideBlockView];
+
     }];
 }
 
@@ -126,6 +132,19 @@ CGFloat const PTMessageCellHeight = 45.f;
     } else {
         
     }
+}
+
+- (void)reloadDataByArray:(NSArray *)array {
+    self.massagesList = (NSMutableArray *)array;
+    [self.tableView reloadData];
+    if (self.tableView.contentSize.height > self.tableView.frame.size.height) {
+        [self scrollTableViewToBottom];
+    }
+}
+
+- (void)scrollTableViewToBottom {
+    CGPoint offset = CGPointMake(0, self.tableView.contentSize.height - self.tableView.frame.size.height);
+    [self.tableView setContentOffset:offset animated:NO];
 }
 
 @end

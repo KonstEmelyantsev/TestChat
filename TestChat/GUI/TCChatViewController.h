@@ -18,5 +18,6 @@
 
 - (void)updateChatForUser:(PTParseUser *)user;
 - (void)stopUpdating;
+- (void)scrollTableViewToBottom;
 
 @end
