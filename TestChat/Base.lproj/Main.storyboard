@@ -301,7 +301,7 @@
                                             <subviews>
                                                 <label opaque="NO" userInteractionEnabled="NO" tag="1" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Username" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="28E-2R-kSK">
                                                     <rect key="frame" x="8" y="11" width="134" height="22"/>
-                                                    <fontDescription key="fontDescription" type="system" pointSize="17"/>
+                                                    <fontDescription key="fontDescription" name="Courier-Bold" family="Courier" pointSize="17"/>
                                                     <color key="textColor" cocoaTouchSystemColor="darkTextColor"/>
                                                     <nil key="highlightedColor"/>
                                                 </label>
@@ -379,20 +379,21 @@
                                                                             <nil key="highlightedColor"/>
                                                                         </label>
                                                                         <textView clipsSubviews="YES" multipleTouchEnabled="YES" tag="2" contentMode="scaleToFill" scrollEnabled="NO" editable="NO" translatesAutoresizingMaskIntoConstraints="NO" id="KmR-Mo-2c4">
-                                                                            <rect key="frame" x="8" y="21" width="154" height="23"/>
-                                                                            <color key="backgroundColor" red="0.0" green="0.98039221759999995" blue="0.94901967050000002" alpha="1" colorSpace="deviceRGB"/>
+                                                                            <rect key="frame" x="8" y="22" width="154" height="21"/>
+                                                                            <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="calibratedWhite"/>
+                                                                            <color key="textColor" white="0.33333333333333331" alpha="1" colorSpace="calibratedWhite"/>
                                                                             <fontDescription key="fontDescription" type="system" pointSize="16"/>
                                                                             <textInputTraits key="textInputTraits" autocapitalizationType="sentences"/>
                                                                         </textView>
                                                                     </subviews>
                                                                     <constraints>
+                                                                        <constraint firstItem="KmR-Mo-2c4" firstAttribute="top" secondItem="kOR-dC-i4D" secondAttribute="bottom" constant="1" id="1eo-OI-RV4"/>
                                                                         <constraint firstItem="kOR-dC-i4D" firstAttribute="leading" secondItem="c3N-ie-3gA" secondAttribute="leading" constant="8" id="62x-iO-bFs"/>
-                                                                        <constraint firstItem="KmR-Mo-2c4" firstAttribute="top" secondItem="kOR-dC-i4D" secondAttribute="bottom" id="7u2-uG-3Xk"/>
+                                                                        <constraint firstAttribute="trailing" secondItem="KmR-Mo-2c4" secondAttribute="trailing" constant="8" id="DP3-HU-iXu"/>
+                                                                        <constraint firstAttribute="bottom" secondItem="KmR-Mo-2c4" secondAttribute="bottom" constant="1" id="JHa-yz-00S"/>
                                                                         <constraint firstAttribute="trailing" secondItem="kOR-dC-i4D" secondAttribute="trailing" constant="8" id="NLZ-FU-qU2"/>
                                                                         <constraint firstItem="kOR-dC-i4D" firstAttribute="top" secondItem="c3N-ie-3gA" secondAttribute="top" id="cO3-Lp-BLJ"/>
-                                                                        <constraint firstAttribute="trailing" secondItem="KmR-Mo-2c4" secondAttribute="trailing" constant="8" id="vDT-xT-dVe"/>
-                                                                        <constraint firstAttribute="bottom" secondItem="KmR-Mo-2c4" secondAttribute="bottom" id="vqg-Ey-tML"/>
-                                                                        <constraint firstItem="KmR-Mo-2c4" firstAttribute="leading" secondItem="c3N-ie-3gA" secondAttribute="leading" constant="8" id="yPT-6n-65w"/>
+                                                                        <constraint firstItem="KmR-Mo-2c4" firstAttribute="leading" secondItem="c3N-ie-3gA" secondAttribute="leading" constant="8" id="fbR-pv-xo8"/>
                                                                     </constraints>
                                                                 </tableViewCellContentView>
                                                             </tableViewCell>
@@ -413,7 +414,8 @@
                                                                         </label>
                                                                         <textView clipsSubviews="YES" multipleTouchEnabled="YES" tag="2" contentMode="scaleToFill" scrollEnabled="NO" editable="NO" textAlignment="right" translatesAutoresizingMaskIntoConstraints="NO" id="lKR-Vd-wyy">
                                                                             <rect key="frame" x="8" y="22" width="154" height="22"/>
-                                                                            <color key="backgroundColor" white="0.66666666666666663" alpha="1" colorSpace="calibratedWhite"/>
+                                                                            <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="calibratedWhite"/>
+                                                                            <color key="textColor" white="0.0" alpha="1" colorSpace="calibratedWhite"/>
                                                                             <fontDescription key="fontDescription" type="system" pointSize="16"/>
                                                                             <textInputTraits key="textInputTraits" autocapitalizationType="sentences"/>
                                                                         </textView>

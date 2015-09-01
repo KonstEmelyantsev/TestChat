@@ -76,17 +76,17 @@ static NSString *messageCellInId    = @"messageCellIn";
     
     [messageTV.layer setCornerRadius:5.f];
     [messageTV setClipsToBounds:YES];
-    
+        
     return  cell;
 }
 
 - (CGFloat)tableView:(UITableView *)tableView heightForRowAtIndexPath:(NSIndexPath *)indexPath {
     PFObject *message = (PFObject *)[self.massagesList objectAtIndex:indexPath.row];
     NSString *text = (NSString *)message[@"text"];
-    return PTMessageCellHeight + [self heightForTextViewRectWithWidth:_cellWidth andText:text];
+    return PTMessageCellHeight + [self heightForTextViewRectWithWidth:_cellWidth text:text];
 }
 
-- (CGFloat)heightForTextViewRectWithWidth:(CGFloat)width andText:(NSString *)text {
+- (CGFloat)heightForTextViewRectWithWidth:(CGFloat)width text:(NSString *)text {
     UIFont * font = [UIFont systemFontOfSize:14.0f];
     CGSize size = [text sizeWithAttributes:@{NSFontAttributeName: font}];
     CGFloat area = size.height * size.width;
