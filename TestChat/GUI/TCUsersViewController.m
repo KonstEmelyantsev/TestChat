@@ -10,6 +10,7 @@
 #import "PTParseHeader.h"
 #import "TCMainViewController.h"
 #import "TCChatViewController.h"
+#import "TCMessagesViewController.h"
 
 @interface TCUsersViewController ()
 
@@ -63,8 +64,9 @@ CGFloat const PTUserCellHeight = 45.f;
     PTParseUser *user = [self.usersList objectAtIndex:indexPath.row];
     //[(TCMainViewController *)self.parentViewController updateChatForUser:user];
     
-    TCChatViewController *vc = [self.storyboard instantiateViewControllerWithIdentifier:@"TCChatViewController"];
-    [vc updateChatForUser:user];
+    TCMessagesViewController *vc = [self.storyboard instantiateViewControllerWithIdentifier:@"TCMessagesViewController"];
+
+    //[vc updateChatForUser:user];
     [self.navigationController pushViewController:vc animated:YES];
 }
 

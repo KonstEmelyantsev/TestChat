@@ -489,6 +489,48 @@
             </objects>
             <point key="canvasLocation" x="1149" y="781"/>
         </scene>
+        <!--Messages View Controller-->
+        <scene sceneID="ivQ-2h-0nO">
+            <objects>
+                <viewController storyboardIdentifier="TCMessagesViewController" useStoryboardIdentifierAsRestorationIdentifier="YES" id="L0b-kq-mIJ" customClass="TCMessagesViewController" sceneMemberID="viewController">
+                    <layoutGuides>
+                        <viewControllerLayoutGuide type="top" id="5KG-Xf-6pf"/>
+                        <viewControllerLayoutGuide type="bottom" id="CW2-2e-Z08"/>
+                    </layoutGuides>
+                    <view key="view" contentMode="scaleToFill" id="1Md-OR-wxE">
+                        <rect key="frame" x="0.0" y="0.0" width="320" height="568"/>
+                        <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                        <subviews>
+                            <collectionView opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" minimumZoomScale="0.0" maximumZoomScale="0.0" dataMode="prototypes" translatesAutoresizingMaskIntoConstraints="NO" id="6Zb-Lt-VfS" customClass="JSQMessagesCollectionView">
+                                <rect key="frame" x="0.0" y="0.0" width="320" height="568"/>
+                                <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                                <collectionViewLayout key="collectionViewLayout" id="dQb-tm-QHX" customClass="JSQMessagesCollectionViewFlowLayout"/>
+                                <cells/>
+                            </collectionView>
+                            <toolbar opaque="NO" clearsContextBeforeDrawing="NO" contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="QPR-QK-stO" customClass="JSQMessagesInputToolbar">
+                                <rect key="frame" x="0.0" y="524" width="320" height="44"/>
+                                <constraints>
+                                    <constraint firstAttribute="height" constant="44" id="1Do-To-xSq"/>
+                                </constraints>
+                                <items/>
+                            </toolbar>
+                        </subviews>
+                        <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="calibratedWhite"/>
+                        <constraints>
+                            <constraint firstItem="QPR-QK-stO" firstAttribute="leading" secondItem="1Md-OR-wxE" secondAttribute="leading" id="1Ig-qp-idk"/>
+                            <constraint firstAttribute="bottom" secondItem="QPR-QK-stO" secondAttribute="bottom" id="49x-an-YU1"/>
+                            <constraint firstItem="6Zb-Lt-VfS" firstAttribute="leading" secondItem="1Md-OR-wxE" secondAttribute="leading" id="LN6-b8-SqC"/>
+                            <constraint firstAttribute="bottom" secondItem="6Zb-Lt-VfS" secondAttribute="bottom" id="UOe-QF-QSe"/>
+                            <constraint firstAttribute="trailing" secondItem="6Zb-Lt-VfS" secondAttribute="trailing" id="VzH-Xd-bWA"/>
+                            <constraint firstAttribute="trailing" secondItem="QPR-QK-stO" secondAttribute="trailing" id="ZCs-Sr-frb"/>
+                            <constraint firstItem="6Zb-Lt-VfS" firstAttribute="top" secondItem="1Md-OR-wxE" secondAttribute="top" id="m0L-zY-RnS"/>
+                        </constraints>
+                    </view>
+                </viewController>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="EDd-AW-ZIn" userLabel="First Responder" sceneMemberID="firstResponder"/>
+            </objects>
+            <point key="canvasLocation" x="1252" y="112"/>
+        </scene>
     </scenes>
     <simulatedMetricsContainer key="defaultSimulatedMetrics">
         <simulatedStatusBarMetrics key="statusBar"/>

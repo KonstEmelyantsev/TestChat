@@ -18,6 +18,7 @@ static NSString *messageCellInId    = @"messageCellIn";
 
 {
     CGFloat _cellWidth;
+    BOOL _isLoading;
 }
 
 @property (weak, nonatomic) IBOutlet UITableView *tableView;
@@ -32,6 +33,8 @@ static NSString *messageCellInId    = @"messageCellIn";
     [super viewDidLoad];
     
     _cellWidth = self.view.frame.size.width;
+    
+    _isLoading = NO;
     
     self.timer = [NSTimer scheduledTimerWithTimeInterval:2.0 target:self selector:@selector(refreshData) userInfo:nil repeats:YES];
     [[NSRunLoop mainRunLoop] addTimer:self.timer forMode:NSRunLoopCommonModes];
@@ -97,14 +100,17 @@ static NSString *messageCellInId    = @"messageCellIn";
 
 - (void)updateChatForUser:(PTParseUser *)user {
     self.curUser = user;
-    
-    [[PTParseManager sharedManager] fetchMessageListForUser:user success:^(NSArray *array) {
-        if(array.count != self.massagesList.count) {
-            [self reloadDataByArray:array];
-        }
-    } errorBlock:^(NSError *error) {
-
-    }];
+    if(!_isLoading) {
+        _isLoading = YES;
+        [[PTParseManager sharedManager] fetchMessageListForUser:user success:^(NSArray *array) {
+            _isLoading = NO;
+            if(array.count != self.massagesList.count) {
+                [self reloadDataByArray:array];
+            }
+        } errorBlock:^(NSError *error) {
+            _isLoading = NO;
+        }];
+    }
 }
 
 - (void)refreshData {
