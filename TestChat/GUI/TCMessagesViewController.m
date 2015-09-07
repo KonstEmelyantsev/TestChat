@@ -38,6 +38,12 @@
     self.collectionView.collectionViewLayout.springinessEnabled = YES;
 }
 
+- (void)viewWillDisappear:(BOOL)animated {
+    [super viewWillDisappear:animated];
+    //[self.timer invalidate];
+    //self.timer = nil;
+}
+
 #pragma mark - JSQMessagesViewController method overrides
 
 - (void)didPressAccessoryButton:(UIButton *)sender {
@@ -185,6 +191,48 @@
 
 - (BOOL)outgoing:(JSQMessage *)message {
     return ([message.senderId isEqualToString:self.senderId] == YES);
+}
+
+- (void)loadMessagesFor:(PTParseUser *)user {
+    if (!_isLoading)
+    {
+        _isLoading = YES;
+        [[PTParseManager sharedManager] fetchMessageListForUser:user success:^(NSArray *objects) {
+            self.automaticallyScrollsToMostRecentMessage = NO;
+            for (PFObject *object in objects )
+            {
+                //JSQMessage *message = [self addMessage:object];
+                //if ([self incoming:message]) incoming = YES;
+            }
+            if ([objects count] != 0)
+            {
+                //if (initialized && incoming)
+                // [JSQSystemSoundPlayer jsq_playMessageReceivedSound];
+                [self finishReceivingMessage];
+                [self scrollToBottomAnimated:NO];
+            }
+            self.automaticallyScrollsToMostRecentMessage = YES;
+            _isLoading = NO;
+        } errorBlock:^(NSError *error) {
+            _isLoading = NO;
+        }];
+    }
+}
+
+- (void)finishReceivingMessage {
+    [self finishReceivingMessageAnimated:YES];
+}
+
+- (void)finishReceivingMessageAnimated:(BOOL)animated {
+    
+    self.showTypingIndicator = NO;
+    
+    [self.collectionView.collectionViewLayout invalidateLayoutWithContext:[JSQMessagesCollectionViewFlowLayoutInvalidationContext context]];
+    [self.collectionView reloadData];
+    
+    /*if (self.automaticallyScrollsToMostRecentMessage && ![self jsq_isMenuVisible]) {
+        [self scrollToBottomAnimated:animated];
+    }*/
 }
 
 @end

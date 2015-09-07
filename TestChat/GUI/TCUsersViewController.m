@@ -65,8 +65,7 @@ CGFloat const PTUserCellHeight = 45.f;
     //[(TCMainViewController *)self.parentViewController updateChatForUser:user];
     
     TCMessagesViewController *vc = [self.storyboard instantiateViewControllerWithIdentifier:@"TCMessagesViewController"];
-
-    //[vc updateChatForUser:user];
+    [vc loadMessagesFor:user];
     [self.navigationController pushViewController:vc animated:YES];
 }
 

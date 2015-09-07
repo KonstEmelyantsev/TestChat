@@ -14,5 +14,6 @@
 
 @property (nonatomic, strong) NSMutableArray *messagesList;
 
+- (void)loadMessagesFor:(PTParseUser *)user;
 
 @end
