@@ -9,6 +9,7 @@
 #import "TCLoginViewController.h"
 #import "PTParseHeader.h"
 #import "TCMainViewController.h"
+#import "TCUsersViewController.h"
 
 @interface TCLoginViewController ()
 
@@ -33,7 +34,7 @@
     [self showBlockView];
     [[PTParseManager sharedManager] logInUsername:username password:password withSuccess:^{
         [self hideBlockView];
-        TCMainViewController *vc = [self.storyboard instantiateViewControllerWithIdentifier:@"TCMainViewController"];
+        TCUsersViewController *vc = [self.storyboard instantiateViewControllerWithIdentifier:@"TCUsersViewController"];
         [self.navigationController pushViewController:vc animated:YES];
     } errorBlock:^(NSError *error) {
         [self hideBlockView];
