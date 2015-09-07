@@ -45,6 +45,7 @@ NSString *const SortDiscriptorByCreated = @"createdAt";
     message[@"creatorId"] = [PTParseUser currentUser].objectId;
     message[@"receiverId"] = user.objectId;
     message[@"text"] = text;
+    message[@"sender"] = [PTParseUser currentUser];
     
     [message saveInBackgroundWithBlock:^(BOOL succeeded, NSError *error) {
         if(!error) {

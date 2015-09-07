@@ -25,6 +25,8 @@
 - (void)viewDidLoad {
     [super viewDidLoad];
     
+    self.messagesList = [NSMutableArray new];
+    
     self.senderId = [PTParseUser currentUser].objectId;
     self.senderDisplayName = [PTParseUser currentUser].username;
     
@@ -51,7 +53,12 @@
 }
 
 - (void)didPressSendButton:(UIButton *)button withMessageText:(NSString *)text senderId:(NSString *)senderId senderDisplayName:(NSString *)senderDisplayName date:(NSDate *)date {
-    
+    [[PTParseManager sharedManager] sendMassage:text toUser:self.curUser success:^{
+        //[self hideBlockView];
+    } errorBlock:^(NSError *error) {
+        //[self hideBlockView];
+        
+    }];
 }
 
 #pragma mark - JSQMessages CollectionView DataSource
@@ -194,20 +201,20 @@
 }
 
 - (void)loadMessagesFor:(PTParseUser *)user {
+    self.curUser = user;
     if (!_isLoading)
     {
         _isLoading = YES;
         [[PTParseManager sharedManager] fetchMessageListForUser:user success:^(NSArray *objects) {
             self.automaticallyScrollsToMostRecentMessage = NO;
-            for (PFObject *object in objects )
-            {
-                //JSQMessage *message = [self addMessage:object];
-                //if ([self incoming:message]) incoming = YES;
+            BOOL incoming = NO;
+            for (PFObject *object in objects ) {
+                JSQMessage *message = [self addMessage:object];
+                if ([self incoming:message]) incoming = YES;
             }
-            if ([objects count] != 0)
-            {
-                //if (initialized && incoming)
-                // [JSQSystemSoundPlayer jsq_playMessageReceivedSound];
+            if ([objects count] != 0) {
+                if (incoming)
+                    [JSQSystemSoundPlayer jsq_playMessageReceivedSound];
                 [self finishReceivingMessage];
                 [self scrollToBottomAnimated:NO];
             }
@@ -233,6 +240,20 @@
     /*if (self.automaticallyScrollsToMostRecentMessage && ![self jsq_isMenuVisible]) {
         [self scrollToBottomAnimated:animated];
     }*/
+}
+
+- (JSQMessage *)addMessage:(PFObject *)object {
+
+    PTParseUser *sender = (PTParseUser *)object[@"sender"];
+    
+    NSString *senderId = (NSString *)sender.objectId;
+    //NSString *username = (NSString *)sender.username;
+    
+    JSQMessage *message = [[JSQMessage alloc] initWithSenderId:senderId senderDisplayName:@"hui" date:object.createdAt text:object[@"text"]];
+
+    [self.messagesList addObject:message];
+
+    return message;
 }
 
 @end

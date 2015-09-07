@@ -13,6 +13,7 @@
 @interface TCMessagesViewController : JSQMessagesViewController
 
 @property (nonatomic, strong) NSMutableArray *messagesList;
+@property (nonatomic, strong) PTParseUser *curUser;
 
 - (void)loadMessagesFor:(PTParseUser *)user;
 
