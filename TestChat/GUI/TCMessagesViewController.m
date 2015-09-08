@@ -23,6 +23,9 @@
     JSQMessagesAvatarImage *avatarImageBlank;
 }
 
+@property (weak, nonatomic) UIView *blockView;
+@property (strong, nonatomic) NSTimer *timer;
+
 @end
 
 @implementation TCMessagesViewController
@@ -41,9 +44,13 @@
     bubbleImageOutgoing = [bubbleFactory outgoingMessagesBubbleImageWithColor:COLOR_OUTGOING];
     bubbleImageIncoming = [bubbleFactory incomingMessagesBubbleImageWithColor:COLOR_INCOMING];
 
+    self.inputToolbar.contentView.leftBarButtonItem.hidden = YES;
     
     self.collectionView.collectionViewLayout.incomingAvatarViewSize = CGSizeZero;
     self.collectionView.collectionViewLayout.outgoingAvatarViewSize = CGSizeZero;
+    
+    self.timer = [NSTimer scheduledTimerWithTimeInterval:3.0 target:self selector:@selector(refreshData) userInfo:nil repeats:YES];
+    [[NSRunLoop mainRunLoop] addTimer:self.timer forMode:NSRunLoopCommonModes];
 }
 
 
@@ -54,8 +61,8 @@
 
 - (void)viewWillDisappear:(BOOL)animated {
     [super viewWillDisappear:animated];
-    //[self.timer invalidate];
-    //self.timer = nil;
+    [self.timer invalidate];
+    self.timer = nil;
 }
 
 #pragma mark - JSQMessagesViewController method overrides
@@ -65,10 +72,12 @@
 }
 
 - (void)didPressSendButton:(UIButton *)button withMessageText:(NSString *)text senderId:(NSString *)senderId senderDisplayName:(NSString *)senderDisplayName date:(NSDate *)date {
+    [self showBlockView];
     [[PTParseManager sharedManager] sendMassage:text toUser:self.curUser success:^{
-        //[self hideBlockView];
+        [self finishSendingMessage];
+        [self hideBlockView];
     } errorBlock:^(NSError *error) {
-        //[self hideBlockView];
+        [self hideBlockView];
     }];
 }
 
@@ -129,12 +138,9 @@
 - (UICollectionViewCell *)collectionView:(JSQMessagesCollectionView *)collectionView cellForItemAtIndexPath:(NSIndexPath *)indexPath {
     JSQMessagesCollectionViewCell *cell = (JSQMessagesCollectionViewCell *)[super collectionView:collectionView cellForItemAtIndexPath:indexPath];
     
-    if ([self outgoing:self.messagesList[indexPath.item]])
-    {
+    if ([self outgoing:self.messagesList[indexPath.item]]) {
         cell.textView.textColor = [UIColor whiteColor];
-    }
-    else
-    {
+    } else {
         cell.textView.textColor = [UIColor blackColor];
     }
      
@@ -209,6 +215,10 @@
     return ([message.senderId isEqualToString:self.senderId] == YES);
 }
 
+- (void)refreshData {
+    [self loadMessagesFor:self.curUser];
+}
+
 - (void)loadMessagesFor:(PTParseUser *)user {
     self.curUser = user;
     if (!_isLoading)
@@ -217,15 +227,18 @@
         [[PTParseManager sharedManager] fetchMessageListForUser:user success:^(NSArray *objects) {
             self.automaticallyScrollsToMostRecentMessage = NO;
             BOOL incoming = NO;
-            for (PFObject *object in objects ) {
-                JSQMessage *message = [self addMessage:object];
-                if ([self incoming:message]) incoming = YES;
-            }
-            if ([objects count] != 0) {
-                if (incoming)
-                    [JSQSystemSoundPlayer jsq_playMessageReceivedSound];
-                [self finishReceivingMessage];
-                [self scrollToBottomAnimated:NO];
+            if([self.messagesList count] != [objects count]) {
+                [self.messagesList removeAllObjects];
+                for (PFObject *object in objects ) {
+                    JSQMessage *message = [self addMessage:object];
+                    if ([self incoming:message]) incoming = YES;
+                }
+                if ([objects count] != 0) {
+                    //if (incoming)
+                        //[JSQSystemSoundPlayer jsq_playMessageReceivedSound];
+                    [self finishReceivingMessage];
+                    [self scrollToBottomAnimated:NO];
+                }
             }
             self.automaticallyScrollsToMostRecentMessage = YES;
             _isLoading = NO;
@@ -258,11 +271,77 @@
     NSString *senderId = (NSString *)sender.objectId;
     //NSString *username = (NSString *)sender.username;
     
-    JSQMessage *message = [[JSQMessage alloc] initWithSenderId:senderId senderDisplayName:@"hui" date:object.createdAt text:object[@"text"]];
+    JSQMessage *message = [[JSQMessage alloc] initWithSenderId:senderId senderDisplayName:self.curUser.username date:object.createdAt text:object[@"text"]];
 
     [self.messagesList addObject:message];
 
     return message;
+}
+
+- (void)finishSendingMessage {
+    [self finishSendingMessageAnimated:YES];
+}
+
+- (void)finishSendingMessageAnimated:(BOOL)animated {
+    
+    UITextView *textView = self.inputToolbar.contentView.textView;
+    textView.text = nil;
+    [textView.undoManager removeAllActions];
+    
+    [JSQSystemSoundPlayer jsq_playMessageSentSound];
+
+    [self.inputToolbar toggleSendButtonEnabled];
+    
+    [[NSNotificationCenter defaultCenter] postNotificationName:UITextViewTextDidChangeNotification object:textView];
+    
+    [self.collectionView.collectionViewLayout invalidateLayoutWithContext:[JSQMessagesCollectionViewFlowLayoutInvalidationContext context]];
+    [self.collectionView reloadData];
+    
+    if (self.automaticallyScrollsToMostRecentMessage) {
+        [self scrollToBottomAnimated:animated];
+    }
+}
+
+#pragma mark blocking ui function
+
+- (void)showBlockView {
+    if(!self.blockView) {
+        UIViewController *curVC = [UIApplication sharedApplication].keyWindow.rootViewController;
+        
+        UIView *blockView = [[UIView alloc]initWithFrame:curVC.view.bounds];
+        blockView.backgroundColor = [UIColor clearColor];
+        UIActivityIndicatorView *aInd = [[UIActivityIndicatorView alloc] initWithActivityIndicatorStyle:UIActivityIndicatorViewStyleWhiteLarge];
+        aInd.hidden = NO;
+        aInd.center = blockView.center;
+        
+        [aInd setColor:[UIColor grayColor]];
+        
+        [blockView addSubview:aInd];
+        [aInd startAnimating];
+        
+        self.blockView = blockView;
+        self.blockView.alpha = 0;
+        self.blockView.hidden = NO;
+        
+        [curVC.view addSubview:self.blockView];
+        
+        [UIView animateWithDuration:0.2 animations:^{
+            self.blockView.alpha = 1;
+        }];
+    }
+    
+}
+
+- (void)hideBlockView {
+    self.blockView.alpha = 0.1;
+    [UIView animateWithDuration:0.3 animations:^{
+        self.blockView.alpha = 0;
+    } completion:^(BOOL finished) {
+        if(finished) {
+            [self.blockView removeFromSuperview];
+            self.blockView = nil;
+        }
+    }];
 }
 
 @end
