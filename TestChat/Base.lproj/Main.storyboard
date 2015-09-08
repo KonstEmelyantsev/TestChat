@@ -279,7 +279,7 @@
                                                 <label opaque="NO" userInteractionEnabled="NO" tag="1" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Username" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="28E-2R-kSK">
                                                     <rect key="frame" x="8" y="11" width="304" height="22"/>
                                                     <fontDescription key="fontDescription" name="Courier-Bold" family="Courier" pointSize="17"/>
-                                                    <color key="textColor" cocoaTouchSystemColor="darkTextColor"/>
+                                                    <color key="textColor" red="0.0" green="0.0" blue="0.0" alpha="1" colorSpace="calibratedRGB"/>
                                                     <nil key="highlightedColor"/>
                                                 </label>
                                             </subviews>
@@ -353,7 +353,7 @@
                                                                                 <constraint firstAttribute="height" constant="21" id="OnP-hV-DRV"/>
                                                                             </constraints>
                                                                             <fontDescription key="fontDescription" name="Courier-Bold" family="Courier" pointSize="14"/>
-                                                                            <color key="textColor" cocoaTouchSystemColor="darkTextColor"/>
+                                                                            <color key="textColor" red="0.0" green="0.0" blue="0.0" alpha="1" colorSpace="calibratedRGB"/>
                                                                             <nil key="highlightedColor"/>
                                                                         </label>
                                                                         <textView clipsSubviews="YES" multipleTouchEnabled="YES" tag="2" contentMode="scaleToFill" scrollEnabled="NO" editable="NO" translatesAutoresizingMaskIntoConstraints="NO" id="KmR-Mo-2c4">
@@ -387,7 +387,7 @@
                                                                                 <constraint firstAttribute="height" constant="21" id="trQ-j6-4VM"/>
                                                                             </constraints>
                                                                             <fontDescription key="fontDescription" name="Courier-Bold" family="Courier" pointSize="14"/>
-                                                                            <color key="textColor" cocoaTouchSystemColor="darkTextColor"/>
+                                                                            <color key="textColor" red="0.0" green="0.0" blue="0.0" alpha="1" colorSpace="calibratedRGB"/>
                                                                             <nil key="highlightedColor"/>
                                                                         </label>
                                                                         <textView clipsSubviews="YES" multipleTouchEnabled="YES" tag="2" contentMode="scaleToFill" scrollEnabled="NO" editable="NO" textAlignment="right" translatesAutoresizingMaskIntoConstraints="NO" id="lKR-Vd-wyy">
@@ -506,6 +506,10 @@
                                 <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                                 <collectionViewLayout key="collectionViewLayout" id="dQb-tm-QHX" customClass="JSQMessagesCollectionViewFlowLayout"/>
                                 <cells/>
+                                <connections>
+                                    <outlet property="dataSource" destination="L0b-kq-mIJ" id="OHx-hY-XCg"/>
+                                    <outlet property="delegate" destination="L0b-kq-mIJ" id="YqT-3V-Vmv"/>
+                                </connections>
                             </collectionView>
                             <toolbar opaque="NO" clearsContextBeforeDrawing="NO" contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="QPR-QK-stO" customClass="JSQMessagesInputToolbar">
                                 <rect key="frame" x="0.0" y="524" width="320" height="44"/>
@@ -526,6 +530,9 @@
                             <constraint firstItem="6Zb-Lt-VfS" firstAttribute="top" secondItem="1Md-OR-wxE" secondAttribute="top" id="m0L-zY-RnS"/>
                         </constraints>
                     </view>
+                    <connections>
+                        <outlet property="collectionView" destination="6Zb-Lt-VfS" id="jIu-pG-xzq"/>
+                    </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="EDd-AW-ZIn" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>

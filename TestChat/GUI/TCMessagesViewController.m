@@ -10,10 +10,17 @@
 #import "PTParseUser.h"
 #import "PTParseHeader.h"
 
+#define HEXCOLOR(c) [UIColor colorWithRed:((c>>24)&0xFF)/255.0 green:((c>>16)&0xFF)/255.0 blue:((c>>8)&0xFF)/255.0 alpha:((c)&0xFF)/255.0]
+#define		COLOR_OUTGOING						HEXCOLOR(0x007AFFFF)
+#define		COLOR_INCOMING						HEXCOLOR(0xE6E5EAFF)
+
 @interface TCMessagesViewController ()
 
 {
     BOOL _isLoading;
+    JSQMessagesBubbleImage *bubbleImageOutgoing;
+    JSQMessagesBubbleImage *bubbleImageIncoming;
+    JSQMessagesAvatarImage *avatarImageBlank;
 }
 
 @end
@@ -29,6 +36,11 @@
     
     self.senderId = [PTParseUser currentUser].objectId;
     self.senderDisplayName = [PTParseUser currentUser].username;
+    
+    JSQMessagesBubbleImageFactory *bubbleFactory = [[JSQMessagesBubbleImageFactory alloc] init];
+    bubbleImageOutgoing = [bubbleFactory outgoingMessagesBubbleImageWithColor:COLOR_OUTGOING];
+    bubbleImageIncoming = [bubbleFactory incomingMessagesBubbleImageWithColor:COLOR_INCOMING];
+
     
     self.collectionView.collectionViewLayout.incomingAvatarViewSize = CGSizeZero;
     self.collectionView.collectionViewLayout.outgoingAvatarViewSize = CGSizeZero;
@@ -57,7 +69,6 @@
         //[self hideBlockView];
     } errorBlock:^(NSError *error) {
         //[self hideBlockView];
-        
     }];
 }
 
@@ -69,9 +80,12 @@
 }
 
 - (id<JSQMessageBubbleImageDataSource>)collectionView:(JSQMessagesCollectionView *)collectionView
-             messageBubbleImageDataForItemAtIndexPath:(NSIndexPath *)indexPath
-{
-    return  nil;
+             messageBubbleImageDataForItemAtIndexPath:(NSIndexPath *)indexPath {
+    if ([self outgoing:self.messagesList[indexPath.item]]) {
+        return bubbleImageOutgoing;
+    }
+    else
+        return bubbleImageIncoming;
 }
 
 - (id<JSQMessageAvatarImageDataSource>)collectionView:(JSQMessagesCollectionView *)collectionView avatarImageDataForItemAtIndexPath:(NSIndexPath *)indexPath {
@@ -79,29 +93,27 @@
 }
 
 - (NSAttributedString *)collectionView:(JSQMessagesCollectionView *)collectionView attributedTextForCellTopLabelAtIndexPath:(NSIndexPath *)indexPath {
-    if (indexPath.item % 3 == 0)
-    {
+    if (indexPath.item % 3 == 0) {
         JSQMessage *message = self.messagesList[indexPath.item];
         return [[JSQMessagesTimestampFormatter sharedFormatter] attributedTimestampForDate:message.date];
     }
-    else return nil;
+    else
+        return nil;
 }
 
 - (NSAttributedString *)collectionView:(JSQMessagesCollectionView *)collectionView attributedTextForMessageBubbleTopLabelAtIndexPath:(NSIndexPath *)indexPath {
     JSQMessage *message = self.messagesList[indexPath.item];
-    if ([self incoming:message])
-    {
-        if (indexPath.item > 0)
-        {
+    if ([self incoming:message]) {
+        if (indexPath.item > 0) {
             JSQMessage *previous = self.messagesList[indexPath.item-1];
-            if ([previous.senderId isEqualToString:message.senderId])
-            {
+            if ([previous.senderId isEqualToString:message.senderId]) {
                 return nil;
             }
         }
         return [[NSAttributedString alloc] initWithString:message.senderDisplayName];
     }
-    else return nil;
+    else
+        return nil;
 }
 
 - (NSAttributedString *)collectionView:(JSQMessagesCollectionView *)collectionView attributedTextForCellBottomLabelAtIndexPath:(NSIndexPath *)indexPath {
@@ -125,6 +137,7 @@
     {
         cell.textView.textColor = [UIColor blackColor];
     }
+     
     return cell;
 }
 
@@ -132,8 +145,7 @@
 
 - (CGFloat)collectionView:(JSQMessagesCollectionView *)collectionView
                    layout:(JSQMessagesCollectionViewFlowLayout *)collectionViewLayout heightForCellTopLabelAtIndexPath:(NSIndexPath *)indexPath {
-    if (indexPath.item % 3 == 0)
-    {
+    if (indexPath.item % 3 == 0) {
         return kJSQMessagesCollectionViewCellLabelHeightDefault;
     }
     else return 0;
@@ -142,13 +154,10 @@
 - (CGFloat)collectionView:(JSQMessagesCollectionView *)collectionView
                    layout:(JSQMessagesCollectionViewFlowLayout *)collectionViewLayout heightForMessageBubbleTopLabelAtIndexPath:(NSIndexPath *)indexPath {
     JSQMessage *message = self.messagesList[indexPath.item];
-    if ([self incoming:message])
-    {
-        if (indexPath.item > 0)
-        {
+    if ([self incoming:message]) {
+        if (indexPath.item > 0) {
             JSQMessage *previous = self.messagesList[indexPath.item-1];
-            if ([previous.senderId isEqualToString:message.senderId])
-            {
+            if ([previous.senderId isEqualToString:message.senderId]) {
                 return 0;
             }
         }
