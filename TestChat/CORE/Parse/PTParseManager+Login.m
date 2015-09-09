@@ -34,16 +34,15 @@ NSString *const ParseError = @"ParseError";
                 }];
             } else {
                 errorBlock([self parseErrorWithValue:ParseInvalidEmail]);
-                return;
             }
         } else {
             errorBlock([self parseErrorWithValue:ParseShortPassword]);
-            return;
         }
     } else {
         errorBlock([self parseErrorWithValue:ParseShortUsername]);
-        return;
     }
+    
+    
 }
 
 - (void)logInUsername:(NSString *)username password:(NSString *)password withSuccess:(PTVoidSuccess)success errorBlock:(PTFailureResponse)errorBlock {
@@ -60,11 +59,9 @@ NSString *const ParseError = @"ParseError";
                                                  }];
         } else {
             errorBlock([self parseErrorWithValue:ParseShortPassword]);
-            return;
         }
     } else {
         errorBlock([self parseErrorWithValue:ParseInvalidEmail]);
-        return;
     }
 }
 
