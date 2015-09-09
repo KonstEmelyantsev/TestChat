@@ -12,6 +12,8 @@
 NSString *const ParseApplicationId = @"4vOae52Y8WKIqstWtDFWwB2i9SE22pUp1KSRKb0o";
 NSString *const ParseClientKey = @"cPsqnNXtN5GtIJrqNCEmbfR2GyS1VqQIZrnarklJ";
 
+CGFloat const ParseUpdateInterval = 3.f;
+
 @implementation PTParseManager
 
 + (instancetype)sharedManager {

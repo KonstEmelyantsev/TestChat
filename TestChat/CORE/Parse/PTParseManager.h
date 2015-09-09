@@ -13,6 +13,8 @@ typedef void(^PTVoidSuccess)();
 typedef void(^PTSuccessResponse)(NSArray *array);
 typedef void(^PTFailureResponse)(NSError *error);
 
+FOUNDATION_EXPORT CGFloat const ParseUpdateInterval;
+
 @interface PTParseManager : NSObject
 
 + (instancetype)sharedManager;
