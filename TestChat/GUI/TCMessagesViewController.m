@@ -187,16 +187,14 @@
 - (void)collectionView:(JSQMessagesCollectionView *)collectionView didTapAvatarImageView:(UIImageView *)avatarImageView
            atIndexPath:(NSIndexPath *)indexPath {
     JSQMessage *message = self.messagesList[indexPath.item];
-    if ([self incoming:message])
-    {
+    if ([self incoming:message]) {
         
     }
 }
 
 - (void)collectionView:(JSQMessagesCollectionView *)collectionView didTapMessageBubbleAtIndexPath:(NSIndexPath *)indexPath {
     JSQMessage *message = self.messagesList[indexPath.item];
-    if (message.isMediaMessage)
-    {
+    if (message.isMediaMessage) {
         
     }
 }
@@ -221,8 +219,7 @@
 
 - (void)loadMessagesFor:(PTParseUser *)user {
     self.curUser = user;
-    if (!_isLoading)
-    {
+    if (!_isLoading) {
         _isLoading = YES;
         [[PTParseManager sharedManager] fetchMessageListForUser:user success:^(NSArray *objects) {
             self.automaticallyScrollsToMostRecentMessage = NO;
@@ -269,9 +266,9 @@
     PTParseUser *sender = (PTParseUser *)object[@"sender"];
     
     NSString *senderId = (NSString *)sender.objectId;
-    //NSString *username = (NSString *)sender.username;
+    NSString *username = ([[PTParseUser currentUser].objectId isEqualToString:senderId]) ? [PTParseUser currentUser].username : self.curUser.username;
     
-    JSQMessage *message = [[JSQMessage alloc] initWithSenderId:senderId senderDisplayName:self.curUser.username date:object.createdAt text:object[@"text"]];
+    JSQMessage *message = [[JSQMessage alloc] initWithSenderId:senderId senderDisplayName:username date:object.createdAt text:object[@"text"]];
 
     [self.messagesList addObject:message];
 
