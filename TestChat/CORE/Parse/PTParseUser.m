@@ -12,7 +12,7 @@
 @implementation PTParseUser
 
 - (id)initWithUsername:(NSString *)username password:(NSString *)password email:(NSString *)email {
-    self = [PTParseUser new];
+    self = [super init];
     if(self) {
         [self resetFields];
         
